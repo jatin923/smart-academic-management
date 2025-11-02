@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Smart AI Data Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Smart Academic Managment</h1>
+            <p class="subtitle">Intelligent Student Performance Tracker</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="stats-card">
+                <div class="stat">
+                    <h3 id="totalStudents">0</h3>
+                    <p>Total Students</p>
+                </div>
+                <div class="stat">
+                    <h3 id="avgMarks">0.00</h3>
+                    <p>Average Marks</p>
+                </div>
+                <div class="stat">
+                    <h3 id="passRate">0%</h3>
+                    <p>Pass Rate</p>
+                </div>
+            </div>
+        </div>
+
+        <nav class="menu-bar">
+            <button class="menu-btn active" onclick="showSection('add')">➕ Add Student</button>
+            <button class="menu-btn" onclick="showSection('view')">👁️ View All</button>
+            <button class="menu-btn" onclick="showSection('search')">🔍 Search</button>
+            <button class="menu-btn" onclick="showSection('analytics')">📊 Analytics</button>
+        </nav>
+
+        <!-- Add Student Section -->
+        <section id="add" class="section active">
+            <h2>Add New Student</h2>
+            <form id="addForm" onsubmit="addStudent(event)">
+                <div class="form-group">
+                    <label for="roll">Roll Number</label>
+                    <input type="number" id="roll" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Student Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="class">Class</label>
+                    <select id="class" onchange="updateSubjects()" required>
+                        <option value="">Select Class</option>
+                        <option value="UKG">UKG</option>
+                        <option value="Class I">Class I</option>
+                        <option value="Class II">Class II</option>
+                        <option value="Class III">Class III</option>
+                        <option value="Class IV">Class IV</option>
+                        <option value="Class V">Class V</option>
+                        <option value="Class VI">Class VI</option>
+                        <option value="Class VII">Class VII</option>
+                        <option value="Class VIII">Class VIII</option>
+                        <option value="Class IX">Class IX</option>
+                        <option value="Class X">Class X</option>
+                        <option value="Class XI Arts">Class XI Arts</option>
+                        <option value="Class XI Commerce">Class XI Commerce</option>
+                        <option value="Class XI Science PCB">Class XI Science PCB</option>
+                        <option value="Class XI Science PCM">Class XI Science PCM</option>
+                        <option value="Class XII Arts">Class XII Arts</option>
+                        <option value="Class XII Commerce">Class XII Commerce</option>
+                        <option value="Class XII Science PCB">Class XII Science PCB</option>
+                        <option value="Class XII Science PCM">Class XII Science PCM</option>
+                    </select>
+                </div>
+                <div id="subjectsContainer" class="subjects-container">
+                    <!-- Subjects will be dynamically added here -->
+                </div>
+                <div class="form-group">
+                    <label for="totalMarks">Total Marks</label>
+                    <input type="number" id="totalMarks" min="0" max="1000" step="0.01" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="percentage">Percentage</label>
+                    <input type="number" id="percentage" min="0" max="100" step="0.01" readonly>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Student</button>
+            </form>
+        </section>
+
+        <!-- View All Section -->
+        <section id="view" class="section">
+            <h2>All Students</h2>
+            <div class="search-bar-container">
+                <input type="text" id="searchView" class="search-bar" placeholder="🔍 Search by name..." onkeyup="searchInView(this.value)">
+            </div>
+            <div id="studentsList" class="students-list"></div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search" class="section">
+            <h2>Search Student</h2>
+            <div class="search-form">
+                <input type="number" id="searchRoll" class="search-bar" placeholder="Enter Roll Number...">
+                <button onclick="searchByRoll()" class="btn btn-primary">Search</button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section">
+            <h2>AI Analytics Dashboard</h2>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>📈 Grade Distribution</h3>
+                    <canvas id="gradeChart"></canvas>
+                </div>
+                <div class="analytics-card">
+                    <h3>🎯 Top Performers</h3>
+                    <div id="topPerformers"></div>
+                </div>
+                <div class="analytics-card">
+                    <h3>⚠️ Needs Attention</h3>
+                    <div id="needsAttention"></div>
+                </div>
+                <div class="analytics-card">
+                    <h3>💡 AI Recommendations</h3>
+                    <div id="aiRecommendations"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
